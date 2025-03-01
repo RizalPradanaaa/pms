@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\WorkOrders;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WorkOrdersController extends Controller
 {
@@ -72,5 +73,15 @@ class WorkOrdersController extends Controller
     {
         $work_order->delete();
         return redirect()->route('work-orders.index')->with('success', 'Work Order berhasil dihapus.');
+    }
+
+    public function report()
+    {
+        $data = WorkOrders::select('nama_produk', 'status', DB::raw('SUM(jumlah) as total_quantity'))
+            ->groupBy('nama_produk', 'status')
+            ->get()
+            ->groupBy('nama_produk');
+
+        return view('work-orders.report', compact('data'));
     }
 }

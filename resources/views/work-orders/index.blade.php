@@ -36,11 +36,16 @@
                             </button>
                         </form>
 
-
+                        <div>
+                        <a href="{{ route('work-orders.report') }}"
+                            class="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-xs font-semibold uppercase rounded-md hover:bg-blue-600 transition">
+                            Report
+                        </a>
                         <a href="{{ route('work-orders.create') }}"
                             class="inline-flex items-center px-4 py-2 bg-black text-white text-xs font-semibold uppercase rounded-md hover:bg-slate-700 transition">
                             Tambah
                         </a>
+                        </div>
                     </div>
 
 
@@ -97,7 +102,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5"
+                                    <td colspan="7"
                                         class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-gray-100 text-center">
                                         Data tidak ditemukan
                                     </td>

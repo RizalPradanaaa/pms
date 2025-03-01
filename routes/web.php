@@ -25,6 +25,7 @@ Route::middleware(['auth', 'role:manager'])->group(function () {
     Route::get('/work-orders/{work_order}/edit', [WorkOrdersController::class, 'edit'])->name('work-orders.edit');
     Route::put('/work-orders/{work_order}', [WorkOrdersController::class, 'update'])->name('work-orders.update');
     Route::delete('/work-orders/{work_order}', [WorkOrdersController::class, 'destroy'])->name('work-orders.destroy');
+    Route::get('/work-orders/report', [WorkOrdersController::class, 'report'])->name('work-orders.report');
 });
 
 Route::middleware(['auth', 'role:operator'])->group(function () {});
