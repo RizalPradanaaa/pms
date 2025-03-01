@@ -16,6 +16,19 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                @auth
+                    @if (Auth::user()->role === 'manager')
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link :href="route('work-orders.index')" :active="request()->routeIs('work-orders.index')">
+                                {{ __('Work Orders') }}
+                            </x-nav-link>
+                        </div>
+                    @endif
+                    @if (Auth::user()->role === 'operator')
+                    @endif
+                @endauth
+
             </div>
 
             <!-- Settings Dropdown -->

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WorkOrdersController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,10 +19,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::middleware(['auth', 'role:manager'])->group(function () {
-    Route::get('/manager', [ManagerController::class, 'index'])->name('manager.index');
+    Route::get('/work-orders', [WorkOrdersController::class, 'index'])->name('work-orders.index');
+    Route::get('/work-orders/create', [WorkOrdersController::class, 'create'])->name('work-orders.create');
+    Route::post('/work-orders', [WorkOrdersController::class, 'store'])->name('work-orders.store');
+    Route::get('/work-orders/{work_order}/edit', [WorkOrdersController::class, 'edit'])->name('work-orders.edit');
+    Route::put('/work-orders/{work_order}', [WorkOrdersController::class, 'update'])->name('work-orders.update');
+    Route::delete('/work-orders/{work_order}', [WorkOrdersController::class, 'destroy'])->name('work-orders.destroy');
 });
 
-Route::middleware(['auth', 'role:operator'])->group(function () {
-    Route::get('/operator', [OperatorController::class, 'index'])->name('operator.index');
-});
+Route::middleware(['auth', 'role:operator'])->group(function () {});
 require __DIR__ . '/auth.php';
