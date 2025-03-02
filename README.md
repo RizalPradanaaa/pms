@@ -7,43 +7,49 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# PMS (Production Management System)
+# PMS (Production Management System) 🚀
 
-🚀 **PMS** adalah aplikasi manajemen produksi yang memudahkan pengelolaan _work order_, pelacakan progres produksi, dan pembuatan laporan hasil produksi.
+PMS adalah sistem manajemen produksi berbasis web yang dibangun menggunakan Laravel 11. Sistem ini memungkinkan Production Manager untuk membuat, memperbarui, dan memantau work order, serta memberikan akses kepada Operator untuk memperbarui status produksi.
 
-## 🎯 **Fitur Utama**
+## Fitur Utama 📋
 
 1. **Role-Based Access Control (RBAC)**
 
-    - **Production Manager:** Membuat, menetapkan operator, memperbarui status, dan melihat laporan.
-    - **Operator:** Melihat work order yang ditugaskan, memperbarui status, dan mencatat jumlah quantity perubahan status.
+    - **Production Manager:** Membuat work order, menetapkan operator, memperbarui status, melihat laporan.
+    - **Operator:** Melihat work order yang ditugaskan, memperbarui status dari **Pending** ke **In Progress** atau **In Progress** ke **Completed**, serta mencatat jumlah quantity.
 
 2. **Manajemen Work Order**
 
-    - Membuat, memperbarui, dan melihat work order dengan berbagai filter.
-    - Operator dapat mencatat progres produksi dan sistem akan mencatat waktu setiap status.
+    - Membuat, memperbarui, dan melihat daftar work order dengan filter status dan tanggal.
 
-3. **Laporan Produksi** _(Opsional)_
-    - Rekapitulasi work order berdasarkan status dan operator.
+3. **Pelacakan Progres Work Order** (Opsional)
 
-## 🛠️ **Persyaratan Sistem**
+    - Mencatat tahapan produksi dan waktu setiap status work order.
 
--   PHP >= 8.1
--   Composer
--   MySQL
+4. **Laporan** (Opsional)
+    - Rekapitulasi work order dan performa operator.
 
----
+## 📸 Tampilan Sistem
 
-## 🚧 **Instalasi**
+1. **Tampilan Work Order Manager**
+   ![Tampilan Work Order Manager](public/images/work_order_manager.png)
 
-### 1. **Clone Repository**
+2. **Detail Work Order Manager**
+   ![Detail Work Order Manager](public/images/detail_work_order_manager.png)
+
+3. **Work Order Operator**
+   ![Work Order Operator](public/images/work_order_operator.png)
+
+## 🛠️ Instalasi
+
+### 1. Clone Repository
 
 ```bash
-https://github.com/RizalPradanaaa/pms.git
+git clone https://github.com/RizalPradanaaa/pms.git
 cd pms
 ```
 
-### 2. **Instal Dependensi**
+### 2. Install Dependencies
 
 ```bash
 composer install
@@ -51,9 +57,9 @@ npm install
 npm run dev
 ```
 
-### 3. **Konfigurasi Environment**
+### 3. Setup Environment
 
-Salin file `.env.example` menjadi `.env` dan atur konfigurasi database:
+Buat file `.env` dan sesuaikan konfigurasi database:
 
 ```env
 DB_CONNECTION=mysql
@@ -64,51 +70,31 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### 4. **Generate Key**
+### 4. Generate Key & Migrasi Database
 
 ```bash
 php artisan key:generate
-```
-
-### 5. **Migrasi Database**
-
-```bash
 php artisan migrate
-```
-
-### 6. **Seed Data Pengguna**
-
-```bash
 php artisan db:seed --class=UserSeeder
 ```
 
-📥 **Akun Default:**
+### 5. Menjalankan Server
 
--   **Production Manager:**
+```bash
+php artisan serve
+```
+
+Akses aplikasi di: [http://localhost:8000](http://localhost:8000)
+
+## 🔑 Akun Default
+
+-   **Manager:**
     -   Email: `manager@gmail.com`
     -   Password: `123456`
 -   **Operator:**
     -   Email: `operator@gmail.com`
     -   Password: `123456`
 
-### 7. **Menjalankan Aplikasi**
+## 📄 Lisensi
 
-```bash
-php artisan serve
-```
-
-Aplikasi akan berjalan di [http://localhost:8000](http://localhost:8000)
-
----
-
-## 📂 **Struktur Direktori Utama**
-
--   `app/Models` - Model Eloquent
--   `database/migrations` - File migrasi database
--   `database/seeders` - Seed data pengguna
-
-## 📄 **Lisensi**
-
-PMS adalah proyek open-source yang dirilis di bawah lisensi [MIT](https://opensource.org/licenses/MIT).
-
-✨ **Selamat menggunakan PMS!**
+Aplikasi ini menggunakan lisensi [MIT](https://opensource.org/licenses/MIT).
