@@ -13,4 +13,9 @@ class WorkOrders extends Model
     {
         return $this->belongsTo(User::class, 'operator_id', 'id');
     }
+
+    public function statusLogs()
+    {
+        return $this->hasMany(StatusLogs::class, 'work_order_id', 'id');
+    }
 }

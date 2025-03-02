@@ -16,6 +16,11 @@ class WorkOrdersController extends Controller
             ->paginate(5);
         return view('work-orders.index', compact('data'));
     }
+    public function show(WorkOrders $work_order)
+    {
+        $workOrder = WorkOrders::findOrFail($work_order->id);
+        return view('work-orders.show', compact('workOrder'));
+    }
     public function create()
     {
         $operator = User::where('role', 'operator')->get();
@@ -75,12 +80,10 @@ class WorkOrdersController extends Controller
         return redirect()->route('work-orders.index')->with('success', 'Work Order berhasil dihapus.');
     }
 
+
     public function report()
     {
-        $data = WorkOrders::select('nama_produk', 'status', DB::raw('SUM(jumlah) as total_quantity'))
-            ->groupBy('nama_produk', 'status')
-            ->get()
-            ->groupBy('nama_produk');
+        $data = WorkOrders::get();
 
         return view('work-orders.report', compact('data'));
     }

@@ -27,10 +27,8 @@
                 <th>No.</th>
                 <th>Nama Produk</th>
                 <th>Total Jumlah</th>
-                <th>Pending</th>
-                <th>In Progress</th>
                 <th>Completed</th>
-                <th>Canceled</th>
+
             </tr>
         </thead>
         <tbody>
@@ -39,10 +37,7 @@
                     <td>{{ $item->nomor_wo }}</td>
                     <td>{{ $item->nama_produk }}</td>
                     <td>{{ $item->jumlah }}</td>
-                    <td>{{ $item->statusLogs->where('status_baru', 'Pending')->sum('quantity_selesai') }}</td>
-                    <td>{{ $item->statusLogs->where('status_baru', 'In Progress')->sum('quantity_selesai') }}</td>
                     <td>{{ $item->statusLogs->where('status_baru', 'Completed')->sum('quantity_selesai') }}</td>
-                    <td>{{ $item->statusLogs->where('status_baru', 'Canceled')->sum('quantity_selesai') }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -13,7 +13,7 @@
 
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-6">
-                        <form method="GET" action="{{ route('work-orders.index') }}" class="flex items-center gap-2">
+                        <form method="GET" action="{{ route('work-operator.index') }}" class="flex items-center gap-2">
                             <select name="status" id="status"
                                 class="pl-3 pr-8 py-2 rounded-md bg-gray-50 dark:bg-gray-700 text-sm text-gray-700 dark:text-gray-300 border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                                 <option value="">Semua Status</option>
@@ -37,13 +37,9 @@
                         </form>
 
                         <div>
-                        <a href="{{ route('work-orders.report') }}"
+                        <a href="{{ route('work-operator.report') }}"
                             class="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-xs font-semibold uppercase rounded-md hover:bg-blue-600 transition">
                             Report
-                        </a>
-                        <a href="{{ route('work-orders.create') }}"
-                            class="inline-flex items-center px-4 py-2 bg-black text-white text-xs font-semibold uppercase rounded-md hover:bg-slate-700 transition">
-                            Tambah
                         </a>
                         </div>
                     </div>
@@ -67,9 +63,7 @@
                                         {{ ($data->currentPage() - 1) * $data->perPage() + $loop->iteration }}
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
-                                        <a href="{{ route('work-orders.show', $item->id) }}" class="text-blue-600 hover:text-blue-800 transition underline">
-                                            {{ $item->nomor_wo }}
-                                        </a>
+                                        {{ $item->nomor_wo }}
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
                                         {{ $item->nama_produk }}
@@ -84,22 +78,10 @@
                                         {{ $item->status }}
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 flex space-x-2">
-                                        <a href="{{ route('work-orders.edit', $item->id) }}"
+                                        <a href="{{ route('work-operator.edit', $item->id) }}"
                                            class="text-blue-600 hover:text-blue-800 transition">
-                                            Edit
+                                            Update
                                         </a>
-                                        <button type="button"
-                                                class="text-red-600 hover:text-red-800 transition"
-                                                onclick="confirmDelete({{ $item->id }})">
-                                            Hapus
-                                        </button>
-                                        <form id="delete-form-{{ $item->id }}"
-                                              action="{{ route('work-orders.destroy', $item->id) }}"
-                                              method="POST"
-                                              class="hidden">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
                                     </td>
                                 </tr>
                             @empty
@@ -122,30 +104,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        function confirmDelete(id) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Data ini akan dihapus secara permanen!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(`delete-form-${id}`).submit();
-                    Swal.fire({
-                        title: 'Berhasil!',
-                        text: 'Data berhasil dihapus!',
-                        icon: 'success',
-                        timer: 2000,
-                        showConfirmButton: false
-                    });
-                }
-            });
-        }
-
         @if(session('success'))
             Swal.fire({
                 title: 'Berhasil!',

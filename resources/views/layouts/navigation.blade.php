@@ -31,6 +31,11 @@
                         </div>
                     @endif
                     @if (Auth::user()->role === 'operator')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('work-operator.index')" :active="request()->routeIs('work-operator.index')">
+                            {{ __('Work Orders') }}
+                        </x-nav-link>
+                    </div>
                     @endif
                 @endauth
 
